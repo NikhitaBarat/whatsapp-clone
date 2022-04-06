@@ -8,8 +8,6 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import MicIcon from '@mui/icons-material/Mic';
 import React, { useState, useEffect } from 'react'
 import './Chat.css'
-import userEvent from '@testing-library/user-event';
-
 function Chat() {
     const [seed, setSeed] = useState("");
     const [input, setInput] = useState("");

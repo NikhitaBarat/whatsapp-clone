@@ -1,9 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import Sidebar from './Sidebar';
 import Chat from './Chat';
-import { BrowserRouter as Router, Switch, Route} from react-router-dom;
-import { Domain } from '@mui/icons-material';
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom"
+// import { Domain } from '@mui/icons-material';
 
 function App() {
   return (

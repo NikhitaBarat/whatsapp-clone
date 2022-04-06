@@ -8,28 +8,27 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import SidebarChat from './SidebarChat.js';
 import db from './firebase';
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs} from "firebase/firestore";
 
 function Sidebar() {
     const [rooms, setRooms] = useState([]);
-
+    const ChatRooms = []
     useEffect(() => {
+        
         const unsubscribe = async () => {
-            const query = await getDocs(collection(db, "room"))
-            console.log(query)
-            setRooms(
-                query.map((doc) => ({
-                    id: doc.id,
-                    data: doc.data
-                }))
-            )
+            const querySnapshot  = await getDocs(collection(db, "rooms"))
+            querySnapshot.forEach((doc) => {
+                const room = doc.data()
+                ChatRooms.push({id:  doc.id, name: room.name})
+            })
+            setRooms(ChatRooms)
+
         }
         unsubscribe()
-    }, [])
-
+    })
     return (
         <div className='sidebar'>
-            <div className='sidebar_header'>
+           <div className='sidebar_header'>
                 <Avatar />
                 <div className='sidebar_headerRight'>
                     <IconButton>
@@ -52,7 +51,7 @@ function Sidebar() {
             <div className='sidebar_chats'>
                 <SidebarChat addNewChat />
                 {rooms.map(room => (
-                    <SidebarChat key={room.id} id={room.id} name={room.data.name} />
+                    <SidebarChat key={room.id} name={room.name} />
                 ))}
             </div>
         </div>

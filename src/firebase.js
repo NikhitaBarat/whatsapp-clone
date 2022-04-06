@@ -1,10 +1,8 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-i
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 const firebaseConfig = {
-    apiKey: "AIzaSyBNtegDq1f2EA67GRujzYEJfHH2BnHuTwE",
+  apiKey: "AIzaSyBNtegDq1f2EA67GRujzYEJfHH2BnHuTwE",
     authDomain: "whatsapp-clone-b4703.firebaseapp.com",
     projectId: "whatsapp-clone-b4703",
     storageBucket: "whatsapp-clone-b4703.appspot.com",
@@ -13,10 +11,10 @@ const firebaseConfig = {
     measurementId: "G-SJW5RTJH1L"
   };
 
-  const firebaseapp = firebase.initializeApp(firebaseConfig);
-  const db = firebaseapp.firestore();
-  const auth = firebase.auth();
-  const provider = new firebase.auth.GoogleAuthProvider();
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
 
   export { auth, provider };
   export default db;

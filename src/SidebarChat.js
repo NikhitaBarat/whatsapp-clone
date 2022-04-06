@@ -3,8 +3,9 @@ import './SidebarChat.css'
 import { Avatar } from "@mui/material";
 import { createAvatar } from '@dicebear/avatars';
 import * as style from '@dicebear/avatars-human-sprites';
+import db from './firebase';
 
-function SidebarChat({ addNewChat }) {
+function SidebarChat({ id, name, addNewChat }) {
     const [seed, setSeed] = useState("");
 
     useEffect(()=>{
@@ -14,7 +15,9 @@ function SidebarChat({ addNewChat }) {
     const createChat = () => {
         const roomName = prompt("Please enter name for chat");
         if (roomName){
-
+            db.collection("rooms").add({
+                name: roomName,
+            });
         }
     };
   return !addNewChat ? (
@@ -26,7 +29,7 @@ function SidebarChat({ addNewChat }) {
         </div>
     </div>
   ):(
-      <div onClick={ createChat }
+      <div onClick={createChat}
       className='sidebar_chat'>
           <h2>Add new chat</h2>
       </div>
